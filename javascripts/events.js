@@ -1,3 +1,5 @@
+const tmdb = require('./tmdb.js');
+
 const addLinkEvents = () => {
   addAuthenticateEvent();
   addSearchEvent();
@@ -40,7 +42,12 @@ const onLoadScreen = () => {
   $('#authScreen').hide();
 };
 
+const pressEnter = () => {
+  tmdb.showResults();
+};
+
 module.exports = {
   addLinkEvents,
   onLoadScreen,
+  pressEnter,
 };
