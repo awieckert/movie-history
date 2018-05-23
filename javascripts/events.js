@@ -43,7 +43,13 @@ const onLoadScreen = () => {
 };
 
 const pressEnter = () => {
-  tmdb.showResults();
+  $(document).keypress((e) => {
+    if (e.key === 'Enter') {
+      let movieToSearch = $('input').val();
+      movieToSearch = movieToSearch.replace(' ', '%20');
+      tmdb.showResults(movieToSearch);
+    }
+  });
 };
 
 module.exports = {
