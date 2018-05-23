@@ -3,3 +3,4 @@ lib/node_modules
 dist/
 haters
 Mac Users
+db/apiKeys.json
