@@ -1,7 +1,10 @@
 
 const domString = (movieArray, imageyStuff) => {
   let strang = '';
-  movieArray.forEach((movie) => {
+  movieArray.forEach((movie, i) => {
+    if (i % 3 === 0) {
+      strang += `<div class='row'>`;
+    }
     strang += `<div class="col-sm-6 col-md-4">`;
     strang += `<div class="thumbnail">`;
     strang += `<img src="${imageyStuff.base_url}/w342/${movie.poster_path}" alt="Movie Poster">`;
@@ -12,6 +15,9 @@ const domString = (movieArray, imageyStuff) => {
     strang +=  `</div>`;
     strang += `</div>`;
     strang += `</div>`;
+    if (i % 3 === 2) {
+      strang += `</div>`;
+    }
   });
 
   printToDom(strang, '#movies');
