@@ -2,13 +2,33 @@
 const dom = require('./dom.js');
 
 let tmdbKey = '';
+let imageConfig = {};
 
 const setKey = (key) => {
   tmdbKey = key;
+  getConfig();
 };
 
 const getKey = () => {
   return tmdbKey;
+};
+
+const getConfig = () => {
+  tmdbConfiguration().then((result) => {
+    imageConfig = result.images;
+  }).catch((err) => {
+    console.error('Error with tmdb config: ', err);
+  });
+};
+
+const tmdbConfiguration = () => {
+  return new Promise ((resolve, reject) => {
+    $.ajax(`https://api.themoviedb.org/3/configuration?api_key=${tmdbKey}`).done((data) => {
+      resolve(data);
+    }).fail((err) => {
+      reject(err);
+    });
+  });
 };
 
 const searchTMDB = (txt) => {
@@ -23,7 +43,7 @@ const searchTMDB = (txt) => {
 
 const showResults = (searchText) => {
   searchTMDB(searchText).then((result) => {
-    dom.domString(result.results);
+    dom.domString(result.results, imageConfig);
   }).catch((err) => {
     console.error('POOP!: ', err);
   });
