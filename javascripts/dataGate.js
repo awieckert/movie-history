@@ -4,6 +4,7 @@ const initialize = () => {
   events.addLinkEvents();
   events.onLoadScreen();
   events.pressEnter();
+  events.saveMovieToWishListEvent();
 };
 
 module.exports = {

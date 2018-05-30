@@ -1,4 +1,6 @@
+/* eslint camelcase: 0 */
 const tmdb = require('./tmdb.js');
+const fireBaseApi = require('./firebaseApi.js');
 
 const addLinkEvents = () => {
   addAuthenticateEvent();
@@ -52,8 +54,27 @@ const pressEnter = () => {
   });
 };
 
+const saveMovieToWishListEvent = () => {
+  $(document).on('click', '.addMovieToWishList', (e) => {
+    const movieToAddCard = $(e.target).closest('.movie');
+    const movieToAdd = {
+      title: movieToAddCard.find('.movie-title').text(),
+      overview: movieToAddCard.find('.movie-overview').text(),
+      poster_path: movieToAddCard.find('img').data('poster'),
+      rating: 0,
+      isWatched: false,
+    };
+    fireBaseApi.saveMovieToWishList(movieToAdd).then(() => {
+      movieToAddCard.remove();
+    }).catch((err) => {
+      console.error('OMG ERROR in saving movie: ', err);
+    });
+  });
+};
+
 module.exports = {
   addLinkEvents,
   onLoadScreen,
   pressEnter,
+  saveMovieToWishListEvent,
 };
