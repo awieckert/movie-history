@@ -1,6 +1,7 @@
 /* eslint camelcase: 0 */
 const tmdb = require('./tmdb.js');
 const fireBaseApi = require('./firebaseApi.js');
+const dom = require('./dom.js');
 
 const addLinkEvents = () => {
   addAuthenticateEvent();
@@ -76,9 +77,7 @@ const saveMovieToWishListEvent = () => {
 
 const getAllMoviesEvent = () => {
   fireBaseApi.getAllMovies().then((moviesArray) => {
-    moviesArray.forEach((movie) => {
-      $('#myMovies-list').append(movie.title);
-    });
+    dom.domString(moviesArray, tmdb.getImageConfig(), '#myMovies-list');
   }).catch((err) => {
     console.error('All the movies didnt come back: ', err);
   });
