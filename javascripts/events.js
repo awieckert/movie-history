@@ -36,6 +36,8 @@ const showMyMovies = () => {
   $('#myMovies').show();
   $('#search-bar').hide();
   $('#authScreen').hide();
+  getAllMoviesEvent();
+  // call the getMoviesEvent
 };
 
 const onLoadScreen = () => {
@@ -69,6 +71,16 @@ const saveMovieToWishListEvent = () => {
     }).catch((err) => {
       console.error('OMG ERROR in saving movie: ', err);
     });
+  });
+};
+
+const getAllMoviesEvent = () => {
+  fireBaseApi.getAllMovies().then((moviesArray) => {
+    moviesArray.forEach((movie) => {
+      $('#myMovies-list').append(movie.title);
+    });
+  }).catch((err) => {
+    console.error('All the movies didnt come back: ', err);
   });
 };
 
