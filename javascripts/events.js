@@ -1,6 +1,7 @@
 /* eslint camelcase: 0 */
 const tmdb = require('./tmdb.js');
 const fireBaseApi = require('./firebaseApi.js');
+const dom = require('./dom.js');
 
 const addLinkEvents = () => {
   addAuthenticateEvent();
@@ -36,6 +37,8 @@ const showMyMovies = () => {
   $('#myMovies').show();
   $('#search-bar').hide();
   $('#authScreen').hide();
+  getAllMoviesEvent();
+  // call the getMoviesEvent
 };
 
 const onLoadScreen = () => {
@@ -69,6 +72,14 @@ const saveMovieToWishListEvent = () => {
     }).catch((err) => {
       console.error('OMG ERROR in saving movie: ', err);
     });
+  });
+};
+
+const getAllMoviesEvent = () => {
+  fireBaseApi.getAllMovies().then((moviesArray) => {
+    dom.domString(moviesArray, tmdb.getImageConfig(), '#myMovies-list');
+  }).catch((err) => {
+    console.error('All the movies didnt come back: ', err);
   });
 };
 
