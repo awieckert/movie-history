@@ -77,7 +77,7 @@ const saveMovieToWishListEvent = () => {
 
 const getAllMoviesEvent = () => {
   fireBaseApi.getAllMovies().then((moviesArray) => {
-    dom.domString(moviesArray, tmdb.getImageConfig(), '#myMovies-list');
+    dom.domString(moviesArray, tmdb.getImageConfig(), '#myMovies-list', true);
   }).catch((err) => {
     console.error('All the movies didnt come back: ', err);
   });
