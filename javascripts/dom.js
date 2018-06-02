@@ -6,7 +6,7 @@ const domString = (movieArray, imageyStuff, whereToPrint, myCollectionMode = fal
       strang += `<div class='row'>`;
     }
     strang += `<div class="col-sm-6 col-md-4">`;
-    strang += `<div class="thumbnail movie">`;
+    strang += `<div class="thumbnail movie" data-firebase-id='${movie.id}'>`;
     if (myCollectionMode) {
       strang += `<a class='btn deleteMovieFromCollectionEvent'>X</a>`;
     }

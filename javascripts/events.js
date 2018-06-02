@@ -83,9 +83,21 @@ const getAllMoviesEvent = () => {
   });
 };
 
+const deleteMovieFromFirebase = () => {
+  $(document).on('click', '.deleteMovieFromCollectionEvent', (e) => {
+    const movieToDeleteId = $(e.target).closest('.movie').data('firebaseId');
+    fireBaseApi.deleteMovieFromDb(movieToDeleteId).then(() => {
+      getAllMoviesEvent();
+    }).catch((err) => {
+      console.error('Delete Function did not work: ', err);
+    });
+  });
+};
+
 module.exports = {
   addLinkEvents,
   onLoadScreen,
   pressEnter,
   saveMovieToWishListEvent,
+  deleteMovieFromFirebase,
 };

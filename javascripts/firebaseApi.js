@@ -38,8 +38,22 @@ const getAllMovies = () => {
   });
 };
 
+const deleteMovieFromDb = (movieID) => {
+  return new Promise ((resolve, reject) => {
+    $.ajax({
+      method: 'DELETE',
+      url: `${fireBaseConfig.databaseURL}/movies/${movieID}.json`,
+    }).done(() => {
+      resolve();
+    }).fail((err) => {
+      reject(err);
+    });
+  });
+};
+
 module.exports = {
   saveMovieToWishList,
   setFireBaseConfig,
   getAllMovies,
+  deleteMovieFromDb,
 };
