@@ -6,6 +6,7 @@ const initialize = () => {
   events.pressEnter();
   events.saveMovieToWishListEvent();
   events.deleteMovieFromFirebase();
+  events.updateMovieToWatchedEvent();
 };
 
 module.exports = {
