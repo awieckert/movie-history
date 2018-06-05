@@ -8,6 +8,7 @@ const initialize = () => {
   events.deleteMovieFromFirebase();
   events.updateMovieToWatchedEvent();
   events.filterEvents();
+  events.authEvents();
 };
 
 module.exports = {
