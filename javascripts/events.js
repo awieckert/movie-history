@@ -49,7 +49,7 @@ const onLoadScreen = () => {
 
 const pressEnter = () => {
   $(document).keypress((e) => {
-    if (e.key === 'Enter' && !$('#search-input').val() === '') {
+    if (e.key === 'Enter' && $('#search-input').val() !== '') {
       let movieToSearch = $('input').val();
       movieToSearch = movieToSearch.replace(' ', '%20');
       tmdb.showResults(movieToSearch);
@@ -167,7 +167,7 @@ const authEvents = () => {
 
   $('#logout').click((e) => {
     firebase.auth().signOut().then(() => {
-      onLoadScreen();
+
     }).catch((error) => {
       console.error(error);
     });
