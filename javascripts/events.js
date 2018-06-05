@@ -49,7 +49,7 @@ const onLoadScreen = () => {
 
 const pressEnter = () => {
   $(document).keypress((e) => {
-    if (e.key === 'Enter' && !$('#search-input').val() === '') {
+    if (e.key === 'Enter' && $('#search-input').val() !== '') {
       let movieToSearch = $('input').val();
       movieToSearch = movieToSearch.replace(' ', '%20');
       tmdb.showResults(movieToSearch);
@@ -149,9 +149,7 @@ const authEvents = () => {
     e.preventDefault();
     const email = $('#inputEmail').val();
     const passWord = $('#inputPassword').val();
-    firebase.auth().signInWithEmailAndPassword(email, passWord).then((user) => {
-      showMyMovies();
-    }).catch((error) => {
+    firebase.auth().signInWithEmailAndPassword(email, passWord).catch((error) => {
       const errorMessage = error.message;
       console.error(errorMessage);
     });
@@ -166,6 +164,24 @@ const authEvents = () => {
     $('#login-form').removeClass('hide');
     $('#registration-form').addClass('hide');
   });
+
+  $('#logout').click((e) => {
+    firebase.auth().signOut().then(() => {
+
+    }).catch((error) => {
+      console.error(error);
+    });
+
+  });
+
+  $('#register-button').click((e) => {
+    const email = $('#registerEmail').val();
+    const passWord = $('#registerPassword').val();
+    firebase.auth().createUserWithEmailAndPassword(email, passWord).catch((error) => {
+      const errorMessage = error.message;
+      console.error(errorMessage);
+    });
+  });
 };
 
 module.exports = {
@@ -177,4 +193,5 @@ module.exports = {
   updateMovieToWatchedEvent,
   filterEvents,
   authEvents,
+  showMyMovies,
 };
