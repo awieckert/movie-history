@@ -149,7 +149,11 @@ const authEvents = () => {
     e.preventDefault();
     const email = $('#inputEmail').val();
     const passWord = $('#inputPassword').val();
-    firebase.auth().signInWithEmailAndPassword(email, passWord).catch((error) => {
+    firebase.auth().signInWithEmailAndPassword(email, passWord).then(() => {
+      $('#sign-in-error').addClass('hide');
+    }).catch((error) => {
+      $('#sign-in-error-msg').text(error.message);
+      $('#sign-in-error').removeClass('hide');
       const errorMessage = error.message;
       console.error(errorMessage);
     });
@@ -177,7 +181,11 @@ const authEvents = () => {
   $('#register-button').click((e) => {
     const email = $('#registerEmail').val();
     const passWord = $('#registerPassword').val();
-    firebase.auth().createUserWithEmailAndPassword(email, passWord).catch((error) => {
+    firebase.auth().createUserWithEmailAndPassword(email, passWord).then(() => {
+      $('#register-error').addClass('hide');
+    }).catch((error) => {
+      $('#register-error-msg').text(error.message);
+      $('#register-error').removeClass('hide');
       const errorMessage = error.message;
       console.error(errorMessage);
     });
