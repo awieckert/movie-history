@@ -12,6 +12,10 @@ const checkLoginState = () => {
       onLoadScreen();
       $('#logout, #search, #my-movies').addClass('hide');
       $('#authentication').removeClass('hide');
+      $('#inputEmail').val('');
+      $('#inputPassword').val('');
+      $('#registerEmail').val('');
+      $('#registerPassword').val('');
     }
   });
 };
